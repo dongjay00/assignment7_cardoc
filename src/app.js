@@ -10,6 +10,8 @@ const { statusCode, routes, responseMessage } = require('./globals');
 
 const globalRouter = require('./routes/globalRouter');
 const userRouter = require('./routes/userRouter');
+const trimRouter = require('./routes/trimRouter');
+const tireRouter = require('./routes/tireRouter');
 
 const { NoPageError } = require('./utils/errors/commonError');
 
@@ -23,9 +25,11 @@ const app = express();
 // app.use(express.static(path.join(__dirname, 'public')));
 
 //미들웨어 설정
-app.use(helmet({
-  contentSecurityPolicy: false
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,12 +46,14 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
   let errCode = err.status || statusCode.INTERNAL_SERVER_ERROR;
-  let message = errCode == statusCode.INTERNAL_SERVER_ERROR ? responseMessage.INTERNAL_SERVER_ERROR : err.message;
+  let message =
+    errCode == statusCode.INTERNAL_SERVER_ERROR
+      ? responseMessage.INTERNAL_SERVER_ERROR
+      : err.message;
 
-  if (req.app.get('env') == "development") logger.err(err);
+  if (req.app.get('env') == 'development') logger.err(err);
 
-  return res.status(errCode)
-    .send(resFormatter.fail(message));
+  return res.status(errCode).send(resFormatter.fail(message));
 });
 
 module.exports = app;

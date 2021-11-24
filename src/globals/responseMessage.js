@@ -1,4 +1,5 @@
 //응답 메시지 모음
+const limit = 5;
 
 module.exports = {
   SUCCESS: 'Request 성공',
@@ -9,8 +10,8 @@ module.exports = {
   INTERNAL_SERVER_ERROR: '서버 오류입니다.',
   DUPLICATE_ERROR: '중복된 요청입니다.',
   PERMISSION_ERROR: '권한이 없습니다.',
-  ENTITY_NOT_EXIST: "DB에 없는 데이터 관련 요청입니다.",
-  NO_PAGE_ERROR: "해당 라우트는 존재하지 않습니다.",
+  ENTITY_NOT_EXIST: 'DB에 없는 데이터 관련 요청입니다.',
+  NO_PAGE_ERROR: '해당 라우트는 존재하지 않습니다.',
 
   // token
   EMPTY_TOKEN: '토큰 값이 없습니다.',
@@ -34,4 +35,13 @@ module.exports = {
   LOGOUT_SUCCESS: '로그아웃 성공',
   NO_USER: '존재하지 않는 회원입니다.',
   MISS_MATCH_PW: '비밀번호가 맞지 않습니다.',
+
+  // 자동차 및 타이어 정보 저장
+  TRIM_TIRE_SAVE_SUCCESS: '자동차 및 타이어 정보 저장 성공',
+  TOO_MUCH_DATA: `한 번에 최대 ${limit}명까지만 요청이 가능합니다.`,
+  EMPTY_TIRE_VALUE: '타이어 규격 정보가 존재하지 않습니다.',
+  INVALID_TIRE_VALUE: '올바르지 않은 타이어 규격 정보입니다.',
+
+  // 타이어 정보 조회
+  READ_TIRE_SUCCESS: '타이어 정보 조회 성공',
 };
