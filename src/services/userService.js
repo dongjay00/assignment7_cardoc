@@ -49,10 +49,7 @@ exports.signin = async (userId, password) => {
   try {
     const user = await models.user.findOne({
       where: {
-        [Op.and]: [
-          { id: userId },
-          { password: password}
-        ],
+        [Op.and]: [{ id: userId }, { password: password }],
       },
     });
 
