@@ -4,7 +4,7 @@ const trimService = require('../services/trimService.js');
 const tireService = require('../services/tireService.js');
 const userService = require('../services/userService.js');
 const logger = require('../utils/logger');
-const { ValidationError } = require('../utils/errors/commonError');
+// const { ValidationError } = require('../utils/errors/commonError');
 const {
   RequestOverflowError,
   DuplicatedError,
