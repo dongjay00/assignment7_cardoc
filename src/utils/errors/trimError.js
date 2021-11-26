@@ -13,4 +13,16 @@ class RequestOverflowError extends Error {
   }
 }
 
+class DuplicatedError extends Error {
+  // 403
+  constructor(
+    message = responseMessage.DUPLICATE_ERROR,
+    status = statusCode.FORBIDDEN,
+  ) {
+    super(message);
+    this.status = status;
+  }
+}
+
 module.exports.RequestOverflowError = RequestOverflowError;
+module.exports.DuplicatedError = DuplicatedError;

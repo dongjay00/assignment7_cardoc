@@ -2,13 +2,18 @@ const { statusCode, responseMessage } = require('../globals');
 const { resFormatter } = require('../utils');
 const trimService = require('../services/trimService.js');
 const tireService = require('../services/tireService.js');
+const userService = require('../services/userService.js');
 const logger = require('../utils/logger');
 const { ValidationError } = require('../utils/errors/commonError');
-const { RequestOverflowError } = require('../utils/errors/trimError');
+const {
+  RequestOverflowError,
+  DuplicatedError,
+} = require('../utils/errors/trimError');
 const {
   EmptyTireValueError,
   InvalidTireValueError,
 } = require('../utils/errors/tireError');
+const { NotMatchedUserError } = require('../utils/errors/userError');
 const trimLibs = require('../libs/trimLibs.js');
 
 const { getCardocApiData } = require('../jobs/cardocApiJobs');
@@ -31,6 +36,14 @@ exports.createTrimTire = async (req, res, next) => {
       let userId = informations[i].id;
       let trimId = informations[i].trimId;
 
+      // 존재하지 않는 유저일 경우
+      const isExistsUser = await userService.checkUser(userId);
+      if (!isExistsUser) throw new NotMatchedUserError();
+
+      // 이미 있는 정보인 경우
+      const isExistsTrim = await trimService.checkTrim(userId, trimId);
+      if (isExistsTrim) throw new DuplicatedError();
+
       let requiredValues = await getCardocApiData(trimId);
 
       // 타이어 규격 정보가 비었을 때
@@ -44,8 +57,10 @@ exports.createTrimTire = async (req, res, next) => {
       )
         throw new InvalidTireValueError();
 
-      const { trim, frontTire, rearTire } =
-        trimLibs.divideTrimValues(requiredValues);
+      const { trim, frontTire, rearTire } = trimLibs.divideTrimValues(
+        userId,
+        requiredValues,
+      );
 
       trims.push(trim);
       tires.push(frontTire);
