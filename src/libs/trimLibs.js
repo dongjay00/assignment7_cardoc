@@ -7,7 +7,7 @@ module.exports = {
     const [frontWidth, frontAspectRatio, frontDiameter] = frontTireValue
       .split(/\/|\D/)
       .map(num => parseInt(num));
-    const [rearWidth, rearAspectRatio, rearDiameter] = frontTireValue
+    const [rearWidth, rearAspectRatio, rearDiameter] = rearTireValue
       .split(/\/|\D/)
       .map(num => parseInt(num));
 
@@ -25,6 +25,7 @@ module.exports = {
       unit: requiredValues.frontTireUnit,
       multiValues: requiredValues.frontTireMultiValues,
       trimId: requiredValues.trimId,
+      userId: userId,
     };
 
     let rearTire = {
@@ -35,6 +36,7 @@ module.exports = {
       unit: requiredValues.rearTireUnit,
       multiValues: requiredValues.rearTireMultiValues,
       trimId: requiredValues.trimId,
+      userId: userId,
     };
 
     return { trim, frontTire, rearTire };

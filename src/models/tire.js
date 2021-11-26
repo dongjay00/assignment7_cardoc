@@ -42,6 +42,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       onUpdate: 'CASCADE',
     });
+
+    models.tire.belongsTo(models.user, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      onUpdate: 'CASCADE',
+    });
   };
 
   return tire;

@@ -9,3 +9,18 @@ exports.createTire = async tires => {
     throw err;
   }
 };
+
+// 타이어 정보 조회
+exports.readTireList = async userId => {
+  try {
+    const tires = await models.tire.findAll({
+      where: {
+        userId: userId,
+      },
+    });
+
+    return tires;
+  } catch (err) {
+    throw err;
+  }
+};
