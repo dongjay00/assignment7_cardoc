@@ -1,0 +1,24 @@
+{
+  "informations": [
+    {
+      "id": "candycandy",
+      "trimId": 9000
+    },
+    {
+      "id": "mylovewolkswagen",
+      "trimId": 5000
+    },
+    {
+      "id": "bmwwow",
+      "trimId": 15000
+    },
+    {
+      "id": "dreamcar",
+      "trimId": 11000
+    },
+    {
+      "id": "testuser",
+      "trimId": 18000
+    }
+  ]
+}
